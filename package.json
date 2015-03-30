@@ -1,0 +1,22 @@
+{
+  "name": "Router",
+  "version": "0.0.1",
+  "description": "Client Site Router",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tanasiliev/Router.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tanasiliev/Router/issues"
+  },
+  "homepage": "https://github.com/tanasiliev/Router",
+  "dependencies": {
+    "express": "~4.12.3"
+  }
+}
