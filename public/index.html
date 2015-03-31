@@ -1,8 +1,19 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-   <script type="text/javascript" src="js/router.js"></script> 
+   <script type="text/javascript" src="/js/router.js"></script> 
   </head>
   <body>
   </body>
 </html>
+<script>
+          Router.route("/home", function(params, state){
+            console.log(params); 
+            console.log(state);  
+          });
+          
+          Router.route("/api/:collectionName/:id", function(params, state){
+            console.log(params);     
+            console.log(state);     
+          });  
+</script>
