@@ -1,6 +1,6 @@
-(function(){
+(function(global){
    
-  var utils = {
+   var utils = {
       String : {
           areEquals : function(str1, str2){
              return str1.trim().toUpperCase() === str2.trim().toUpperCase();
@@ -22,9 +22,9 @@
              throw new Error(msg);
           }        
       }
-  };    
+   };    
     
-  var Router = {
+   var Router = {
       routes : [],
       route : function(path, handler){
          if(!utils.String.is(path) || utils.String.isEmpty(path)){
@@ -57,14 +57,14 @@
               }
           }
       }
-  };
+   };
     
-  var Route = function(path, handler){
+   var Route = function(path, handler){
       this.path = path;
       this.handler = handler;
-  };
+   };
   
-  Route.prototype.match = function(url){
+   Route.prototype.match = function(url){
         var selt =  this;
         if(utils.String.areEquals(selt.path, url)){
            return true;
@@ -87,14 +87,21 @@
             }      
         } 
         return false;
-  };
-
-  window.Router = {
+   };
+   
+   var router = {
       route: (function(){
              Router.run();
              return Router.route.bind(Router);
       })()
-  }
-})();
+  };
+  
+   if(typeof define === 'function' && define.amd){ 
+      define(function () { return router; });
+   } else { 
+      global['observer'] = router;
+   }
+    
+})(this);
 
 
