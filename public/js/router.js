@@ -39,12 +39,12 @@
       run : function(){
           var self = this;
           var listener = function(event) {
-            self.findPath(location.pathname, event.state);  
+            self.findRoute(location.pathname, event.state);  
           }
           window.addEventListener("load",listener, false);
           window.addEventListener("popstate", listener, false);
       },
-      findPath : function(url, state){
+      findRoute : function(url, state){
           var routes = this.routes;   
           for(var i = 0;  i < routes.length; i++ ){
               var route = routes[i];
@@ -89,14 +89,12 @@
         return false;
   };
 
-   
   window.Router = {
       route: (function(){
              Router.run();
              return Router.route.bind(Router);
       })()
   }
-      
 })();
 
 
