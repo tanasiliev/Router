@@ -2,14 +2,14 @@
    
   var utils = {
       String : {
+          areEquals : function(str1, str2){
+             return str1.trim().toUpperCase() === str2.trim().toUpperCase();
+          },
           is : function(obj){
               return  typeof obj == 'string' || obj instanceof String;    
           },
           isEmpty : function(obj){
              return (obj.length === 0 || !obj.trim());
-          },
-          areEquals : function(str1, str2){
-             return str1.trim().toUpperCase() === str2.trim().toUpperCase();
           }
       },
       Function : {
@@ -17,8 +17,8 @@
               return !!(obj && obj.constructor && obj.call);     
             }
       },
-      error : {
-          show : function(msg){
+      Error : {
+          throw : function(msg){
              throw new Error(msg);
           }        
       }
@@ -28,10 +28,10 @@
       routes : [],
       route : function(path, handler){
          if(!utils.String.is(path) || utils.String.isEmpty(path)){
-             utils.error.show("Invalid path " + path);
+             utils.Error.throw("Invalid path " + path);
          }
          if(!utils.Function.is(handler)){
-            utils.error.show("Invalid Function " + handler);
+            utils.Error.throw("Invalid Function " + handler);
          }    
          var route = new Route(path, handler);
          this.routes.push(route);    
@@ -39,7 +39,7 @@
       run : function(){
           var self = this;
           var listener = function(event) {
-            self.findPath(location.pathname, event.state || undefined );  
+            self.findPath(location.pathname, event.state);  
           }
           window.addEventListener("load",listener, false);
           window.addEventListener("popstate", listener, false);
@@ -49,8 +49,11 @@
           for(var i = 0;  i < routes.length; i++ ){
               var route = routes[i];
               if(route.match(url)){
-                   route.handler(route.params || undefined, state);
-                   return;
+                   var options = { 
+                       params: route.params, 
+                       state : state 
+                   };
+                   return route.handler(options);
               }
           }
       }
