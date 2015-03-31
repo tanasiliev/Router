@@ -94,7 +94,7 @@
              Router.run();
              return Router.route.bind(Router);
       })()
-  };
+   };
   
    if(typeof define === 'function' && define.amd){ 
       define(function () { return router; });
