@@ -103,7 +103,7 @@
             for(var i =0; i < params.length; i++){
                 pattern = pattern.replace(params[i].slice(1), "([^/]+)");
             }
-            var regex = new RegExp(pattern);
+            var regex = new RegExp(pattern + "$");
             if(regex.exec(url)){
                var obj = {};    
                for(var i = 0; i < params.length; i++){
