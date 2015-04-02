@@ -16,7 +16,7 @@ Clien Site Router
       });
       
       var routes = {
-            "contacts" : fun1,
-            "contacts/:id" : fun2
+            "contacts/:id" : fun1,
+            "contacts/:id/edit" : fun2
       };
       router.route(routes); 	 
